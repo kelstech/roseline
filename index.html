@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoseLine | Glasses, Lenses & Eye Accessories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav wrapper">
+        <h1 class="brand">RoseLine</h1>
+        <ul>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#payment">Payment</a></li>
+          <li><a href="#contact">Complaints & Inquiries</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero-content wrapper">
+        <p class="tag">Clear Vision. Elegant Style.</p>
+        <h2>Your one-stop shop for quality eye care products.</h2>
+        <p>
+          Explore premium glasses, frames, contact lenses, specialty lenses,
+          and stylish eye accessories curated for your comfort and confidence.
+        </p>
+        <a class="btn" href="#products">Shop Now</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="products" class="wrapper section">
+        <h3>Our Product Categories</h3>
+        <div class="grid">
+          <article class="card">
+            <h4>Glasses</h4>
+            <p>Modern and classic glasses for all-day comfort.</p>
+          </article>
+          <article class="card">
+            <h4>Frames</h4>
+            <p>Durable designer frames in multiple colors and sizes.</p>
+          </article>
+          <article class="card">
+            <h4>Lenses</h4>
+            <p>Single vision, bifocal, and anti-blue light lens options.</p>
+          </article>
+          <article class="card">
+            <h4>Contact Lenses</h4>
+            <p>Daily, monthly, and toric contact lenses from top brands.</p>
+          </article>
+          <article class="card">
+            <h4>Eye Accessories</h4>
+            <p>Lens cleaners, cases, straps, and protective accessories.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="payment" class="section highlight">
+        <div class="wrapper payment-wrap">
+          <div>
+            <h3>Secure Checkout with Paystack</h3>
+            <p>
+              Complete your purchase safely using Paystack. Enter your details
+              below and click <strong>Pay Now</strong> to continue.
+            </p>
+          </div>
+
+          <form id="paymentForm" class="form-card">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com" required />
+
+            <label for="amount">Amount (NGN)</label>
+            <input type="number" id="amount" min="100" step="100" placeholder="10000" required />
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Rose Customer" required />
+
+            <button type="submit" class="btn">Pay Now</button>
+            <p class="note">
+              Replace the test public key in <code>script.js</code> with your live
+              Paystack public key before production.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section id="contact" class="wrapper section">
+        <h3>Complaints & Inquiries</h3>
+        <p class="section-intro">
+          We are here to help. Send us your complaints, questions, or product inquiries.
+        </p>
+
+        <form id="contactForm" class="form-card full">
+          <label for="contactName">Name</label>
+          <input type="text" id="contactName" required />
+
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" required />
+
+          <label for="subject">Subject</label>
+          <select id="subject" required>
+            <option value="">Select a subject</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Inquiry">Inquiry</option>
+            <option value="Order Support">Order Support</option>
+          </select>
+
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" required></textarea>
+
+          <button type="submit" class="btn">Send Message</button>
+          <p id="contactStatus" class="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> RoseLine. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
