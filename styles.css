@@ -1,0 +1,179 @@
+:root {
+  --primary: #821d57;
+  --secondary: #f8e8f1;
+  --bg: #fff;
+  --text: #1f1f1f;
+  --muted: #666;
+  --card-shadow: 0 10px 30px rgba(130, 29, 87, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+.wrapper {
+  width: min(1080px, 90%);
+  margin-inline: auto;
+}
+
+.hero {
+  background: linear-gradient(120deg, #fbe7f2 0%, #fefcfe 60%, #ffffff 100%);
+  padding-bottom: 3.5rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.brand {
+  color: var(--primary);
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.hero-content {
+  padding: 3rem 0 1rem;
+  max-width: 760px;
+}
+
+.hero-content h2 {
+  margin: 0.5rem 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.tag {
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-top: 0;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #f3d6e7;
+  padding: 1.2rem;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+}
+
+.highlight {
+  background: var(--secondary);
+}
+
+.payment-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.3rem;
+  box-shadow: var(--card-shadow);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.form-card.full {
+  max-width: 700px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #e3d0dc;
+  border-radius: 8px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #eec2dc;
+  border-color: #c87fa6;
+}
+
+.btn {
+  border: 0;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  width: fit-content;
+}
+
+.note,
+.section-intro,
+.status,
+footer {
+  color: var(--muted);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #f1dceb;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .payment-wrap {
+    grid-template-columns: 1fr;
+  }
+}
