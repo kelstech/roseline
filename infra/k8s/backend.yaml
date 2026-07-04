@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ehis-core-backend
+  namespace: ehis
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: ehis-core-backend }
+  template:
+    metadata:
+      labels: { app: ehis-core-backend }
+    spec:
+      containers:
+        - name: api
+          image: ehis-core-backend:latest
+          ports: [{ containerPort: 8000 }]
+          envFrom:
+            - configMapRef: { name: ehis-core-config }
+            - secretRef: { name: ehis-core-secrets }
+          readinessProbe: { httpGet: { path: /api/v1/readyz, port: 8000 } }
+          livenessProbe: { httpGet: { path: /api/v1/healthz, port: 8000 } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ehis-core-backend
+  namespace: ehis
+spec:
+  selector: { app: ehis-core-backend }
+  ports: [{ port: 80, targetPort: 8000 }]

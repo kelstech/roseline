@@ -1,0 +1,1 @@
+"""EHIS core foundation package."""
