@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Roseline Module 01 Patient Registration and MPI API
+  version: 0.1.0
+paths:
+  /api/module-01/permissions:
+    get:
+      summary: List Module 01 permissions
+      responses: { '200': { description: Permission map } }
+  /api/module-01/patients:
+    post:
+      summary: Register a patient
+      security: [{ PermissionHeader: [patient.register] }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/PatientRegistration' } } }
+      responses:
+        '201': { description: Patient with duplicate candidates and generated barcode/QR values }
+        '422': { description: Validation errors }
+    get:
+      summary: Search patients by MRN or name
+      security: [{ PermissionHeader: [patient.view] }]
+      parameters: [{ name: q, in: query, schema: { type: string } }]
+      responses: { '200': { description: Matching patients } }
+  /api/module-01/patients/duplicate-search:
+    post:
+      summary: Score a registration payload against the MPI
+      security: [{ PermissionHeader: [patient.view] }]
+      responses: { '200': { description: Duplicate candidates } }
+  /api/module-01/patients/{id}/mark-deceased:
+    post:
+      summary: Mark a patient deceased
+      security: [{ PermissionHeader: [patient.deceased.mark] }]
+      parameters: [{ name: id, in: path, required: true, schema: { type: string, format: uuid } }]
+      responses: { '200': { description: Updated patient } }
+  /api/module-01/patient-merges:
+    post:
+      summary: Merge a source patient into a target patient
+      security: [{ PermissionHeader: [patient.merge] }]
+      responses: { '200': { description: Merge record and updated patients } }
+  /api/module-01/reports/registration-summary:
+    get:
+      summary: Registration summary report
+      security: [{ PermissionHeader: [patient.reports.view] }]
+      responses: { '200': { description: Counts by status, foreign, and deceased patients } }
+components:
+  securitySchemes:
+    PermissionHeader:
+      type: apiKey
+      in: header
+      name: x-permissions
+  schemas:
+    PatientRegistration:
+      type: object
+      required: [legalFamilyName, legalGivenName]
+      properties:
+        status: { enum: [active, temporary, anonymous_emergency, newborn, deceased] }
+        legalFamilyName: { type: string }
+        legalGivenName: { type: string }
+        dateOfBirth: { type: string, format: date }
+        identifiers: { type: array, items: { type: object } }
+        addresses: { type: array, items: { type: object } }
+        phones: { type: array, items: { type: object } }
+        insurances: { type: array, items: { type: object } }
+        contacts: { type: array, items: { type: object } }
+        consents: { type: array, items: { type: object } }
