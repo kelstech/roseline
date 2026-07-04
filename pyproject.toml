@@ -1,0 +1,18 @@
+[project]
+name = "roseline-ehis"
+version = "0.2.0"
+description = "Enterprise Hospital Information System"
+requires-python = ">=3.13"
+dependencies = [
+  "Django>=5.2",
+  "djangorestframework>=3.16",
+  "argon2-cffi>=25.1",
+  "PyJWT>=2.10",
+  "cryptography>=45",
+  "redis>=6",
+  "celery>=5.5",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "backend.settings"
+python_files = ["tests.py", "test_*.py"]
