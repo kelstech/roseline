@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  title: EHIS Module 05 Workforce Management API
+  version: 1.0.0
+  description: REST API for enterprise employees, credentials, assignments, scheduling, audit history, and reporting.
+servers:
+  - url: /api/v1
+security:
+  - bearerAuth: []
+paths:
+  /workforce/employees/:
+    get:
+      summary: Search and filter employees
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: status, in: query, schema: { type: string } }
+        - { name: category, in: query, schema: { type: string } }
+        - { name: department_id, in: query, schema: { type: string, format: uuid } }
+      responses: { '200': { description: Employee list } }
+    post:
+      summary: Create an employee master record
+      responses: { '201': { description: Employee created } }
+  /workforce/employees/{id}/:
+    get: { summary: Retrieve employee profile, responses: { '200': { description: Employee profile } } }
+    patch: { summary: Update employee profile, responses: { '200': { description: Employee updated } } }
+    delete: { summary: Soft delete employee profile, responses: { '204': { description: Employee soft-deleted } } }
+  /workforce/employees/{id}/photo/:
+    post: { summary: Upload profile photograph, responses: { '200': { description: Photo stored } } }
+  /workforce/employees/{id}/biometrics/:
+    post: { summary: Enroll biometric metadata, responses: { '201': { description: Biometric enrolled } } }
+  /workforce/employees/{id}/digital-signatures/:
+    post: { summary: Upload digital signature certificate metadata, responses: { '201': { description: Signature stored } } }
+  /workforce/employees/{id}/lifecycle-events/:
+    post: { summary: Record employment lifecycle event, responses: { '201': { description: Event recorded } } }
+  /workforce/employees/{id}/audit-history/:
+    get: { summary: Read employee audit history, responses: { '200': { description: Audit entries } } }
+  /workforce/assignments/:
+    get: { summary: List department assignments, responses: { '200': { description: Assignments } } }
+    post: { summary: Assign employee to organization unit, responses: { '201': { description: Assignment created } } }
+  /workforce/licenses/:
+    get: { summary: List professional licenses, responses: { '200': { description: Licenses } } }
+    post: { summary: Create or verify license, responses: { '201': { description: License created } } }
+  /workforce/clinical-privileges/:
+    get: { summary: List clinical privileges, responses: { '200': { description: Privileges } } }
+    post: { summary: Grant clinical privilege, responses: { '201': { description: Privilege granted } } }
+  /workforce/qualifications/:
+    get: { summary: List qualifications, responses: { '200': { description: Qualifications } } }
+    post: { summary: Add qualification, responses: { '201': { description: Qualification added } } }
+  /workforce/training-records/:
+    get: { summary: List training records, responses: { '200': { description: Training records } } }
+    post: { summary: Add training record, responses: { '201': { description: Training record added } } }
+  /workforce/schedules/:
+    get: { summary: List schedules, responses: { '200': { description: Schedules } } }
+    post: { summary: Create schedule with conflict validation, responses: { '201': { description: Schedule created }, '409': { description: Conflict detected } } }
+  /workforce/availability/:
+    get: { summary: List availability blocks, responses: { '200': { description: Availability } } }
+    post: { summary: Create availability block, responses: { '201': { description: Availability created } } }
+  /workforce/bulk-import/:
+    post: { summary: Import workforce records, responses: { '202': { description: Import accepted } } }
+  /workforce/bulk-export/:
+    post: { summary: Export workforce records, responses: { '202': { description: Export accepted } } }
+  /workforce/reports/{report_name}/:
+    get: { summary: Generate workforce report, responses: { '200': { description: Report output } } }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
