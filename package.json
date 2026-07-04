@@ -1,0 +1,22 @@
+{
+  "name": "roseline-module-01-mpi",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "lint": "node scripts/validate-module-01.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "express": "latest",
+    "zod": "latest",
+    "uuid": "latest",
+    "qrcode": "latest"
+  },
+  "devDependencies": {}
+}
